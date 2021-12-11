@@ -2,6 +2,8 @@ import { useRef, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
+import { apiClient, toast } from 'helpers';
+
 export default function Home() {
   const pwdRef = useRef();
   const [phase, setPhase] = useState(1);
@@ -9,12 +11,13 @@ export default function Home() {
   const [showNo, setShowNo] = useState(true);
   const [accepted, setAccepted] = useState(false);
 
-  const handleSubmit = () => {
-    const pwdValue = pwdRef.current.value;
-    if (pwdValue === 'travai') {
-      setPhase(2);
-    } else {
-      alert('Sai mật khẩu gòiiii bạn uii');
+  const handleSubmit = async () => {
+    try {
+      const pwdValue = (pwdRef.current as any).value;
+      await apiClient.post.auth({ pwd: pwdValue });
+      toast.success('Chúc mừng đồng chí đã nhập đúng mật khẩu');
+    } catch (err) {
+      toast.info('Sai mật khẩu rồi đồng chí ơiii');
     }
   };
 
@@ -27,7 +30,7 @@ export default function Home() {
       {phase === 1 && (
         <div
           className="container px-12 py-4 flex flex-col items-center justify-center"
-          style={{ height: '100vh ' }}
+          style={{ height: '100vh' }}
         >
           <div
             className="rounded-full overflow-hidden relative"
@@ -47,13 +50,13 @@ export default function Home() {
 
             <input
               ref={pwdRef}
-              class="border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+              className="border rounded w-full py-2 px-3 text-gray-700 leading-tight"
               type="password"
               placeholder="Mời yangho nhập mật khẩu"
             />
 
             <button
-              class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
               onClick={handleSubmit}
             >
               Dzoooooooo
@@ -62,7 +65,7 @@ export default function Home() {
         </div>
       )}
 
-      {phase === 2 && (
+      {/* {phase === 2 && (
         <div className="p-5">
           <h1 className="text-lg font-medium mb-3">Chào Minteau,</h1>
           <p className="text-base font-light leading-7">
@@ -88,7 +91,7 @@ export default function Home() {
           </p>
 
           <button
-            class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded w-full mt-5"
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded w-full mt-5"
             onClick={() => setPhase(3)}
           >
             Hm... đọc tiếp
@@ -125,7 +128,7 @@ export default function Home() {
 
           {!accepted ? (
             <button
-              class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded w-full mt-3"
+              className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded w-full mt-3"
               onClick={() => setAccepted(true)}
             >
               Xứng đáng có 01 cơ hội 😂
@@ -141,7 +144,7 @@ export default function Home() {
           )}
           {showNo && (
             <button
-              class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded w-full mt-3 "
+              className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded w-full mt-3 "
               onClick={() => setShowNo(false)}
             >
               Khummmmmm
@@ -155,7 +158,7 @@ export default function Home() {
             Trở về
           </p>
         </div>
-      )}
+      )} */}
     </>
   );
 }
