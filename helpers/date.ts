@@ -1,0 +1,12 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import objectSupport from 'dayjs/plugin/objectSupport';
+
+import 'dayjs/locale/vi';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(localizedFormat);
+dayjs.extend(objectSupport);

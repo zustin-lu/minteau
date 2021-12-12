@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
+import dayjs from 'dayjs';
 
 import { connectDB } from 'database';
 import { apiMethodStream } from 'helpers';
@@ -17,7 +18,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           code: StatusCodes.UNAUTHORIZED,
         });
       } else {
-        response = makeResponse({});
+        response = makeResponse({
+          payload: {
+            expiredAt: dayjs().add(1, 'h').toISOString(),
+          },
+        });
       }
 
       res.status(response.code).json(response);

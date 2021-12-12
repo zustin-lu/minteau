@@ -5,7 +5,7 @@ type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE';
 type Response = {
   code?: StatusCodes;
   reasonPhrase?: ReasonPhrases;
-  data?: null | unknown;
+  payload?: null | unknown;
 };
 type ResolverHelpers = {
   makeResponse: (res: Response) => Response;
@@ -17,7 +17,7 @@ function makeResponse(response: Response): Response {
   return {
     ...response,
     code: response.code || StatusCodes.OK,
-    data: response.data || null,
+    payload: response.payload || null,
   };
 }
 
