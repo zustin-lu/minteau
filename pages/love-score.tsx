@@ -92,8 +92,11 @@ function LoveScore() {
             Love you to the moon and back
           </a>
         </div>
-        <Button className="mt-2" disabled>
-          1000mt / vé (comming soon)
+        <Button
+          className="mt-2"
+          onClick={() => toast.error('Hết vé! Vé đã được mua bởi Chou yangho')}
+        >
+          1000mt / vé (only one)
         </Button>
       </div>
 
