@@ -1,5 +1,6 @@
 const routes = {
-  home: () => '/',
+  auth: () => '/',
+  home: () => '/home',
   greeting: () => '/greeting',
   chanceQuestion: () => '/chance-question',
 };

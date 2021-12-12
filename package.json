@@ -8,8 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.2",
     "autoprefixer": "^10.4.0",
     "axios": "^0.24.0",
+    "classnames": "^2.3.1",
     "dayjs": "^1.10.7",
     "http-status-codes": "^2.1.4",
     "lodash": "^4.17.21",

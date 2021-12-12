@@ -7,7 +7,7 @@ import { apiClient, toast, localStorage } from 'helpers';
 import { routes } from 'constant';
 import { useAuth } from 'hooks';
 
-export default function Home() {
+function Home() {
   const pwdRef = useRef();
   const router = useRouter();
 
@@ -79,3 +79,5 @@ Home.getLayout = function getLayout(page: ReactElement) {
     </>
   );
 };
+
+export default Home;
