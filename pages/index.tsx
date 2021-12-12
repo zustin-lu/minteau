@@ -6,15 +6,16 @@ import Header from 'next/head';
 import { apiClient, toast, localStorage } from 'helpers';
 import { routes } from 'constant';
 import { useAuth } from 'hooks';
+import { Button, Input } from 'components';
 
-function Home() {
+function Auth() {
   const pwdRef = useRef();
   const router = useRouter();
 
   const { authState } = useAuth({
     onAuthStateChange(state) {
       if (state === 'authenticated') {
-        router.replace(routes.greeting());
+        router.replace(routes.home());
       }
     },
   });
@@ -26,13 +27,13 @@ function Home() {
       const { expiredAt } = data.payload || {};
       localStorage.set('authExpiredAt', expiredAt);
       toast.success('Chúc mừng đồng chí đã nhập đúng mật khẩu');
-      router.push(routes.greeting());
+      router.replace(routes.home());
     } catch (err) {
       toast.info('Sai mật khẩu rồi đồng chí ơiii');
     }
   };
 
-  if (authState === 'idle') {
+  if (authState === 'authenticated') {
     return null;
   }
 
@@ -53,25 +54,22 @@ function Home() {
           Mật khẩu là nước uống yêu thích của em, viết liền không dấu
         </div>
 
-        <input
+        <Input
           ref={pwdRef}
           className="border rounded w-full py-2 px-3 text-gray-700 leading-tight"
           type="password"
           placeholder="Mời yangho nhập mật khẩu"
         />
 
-        <button
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
-          onClick={handleSubmit}
-        >
+        <Button variant="info" className="w-full" onClick={handleSubmit}>
           Dzoooooooo
-        </button>
+        </Button>
       </div>
     </div>
   );
 }
 
-Home.getLayout = function getLayout(page: ReactElement) {
+Auth.getLayout = function getLayout(page: ReactElement) {
   return (
     <>
       <Header>For Minteau</Header>
@@ -80,4 +78,4 @@ Home.getLayout = function getLayout(page: ReactElement) {
   );
 };
 
-export default Home;
+export default Auth;

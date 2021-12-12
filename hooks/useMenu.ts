@@ -17,7 +17,7 @@ type Output = {
 const menuRoutes: MenuRouteItem[] = [
   { text: 'Trang chủ', pathname: routes.home() },
   { text: 'Trò mèo đầu tiên của lmint', pathname: routes.greeting() },
-  { text: 'Máy tính điểm của Boss Chou', pathname: routes.greeting() },
+  { text: 'Máy tính điểm của Boss Chou', pathname: routes.loveScore() },
 ];
 
 function useMenu({ removeCurrentPage }: Input = {}): Output {

@@ -1,7 +1,8 @@
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { HiCheck } from 'react-icons/hi';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +15,7 @@ import { Modal } from 'components';
 const DefaultLayout: FC = ({ children }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const queryClient = useMemo(() => new QueryClient(), []);
 
   const { authState } = useAuth({
     onAuthStateChange(state) {
@@ -26,24 +28,28 @@ const DefaultLayout: FC = ({ children }) => {
   const { menuRoutes } = useMenu();
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Head>
         <title>For Minteau</title>
       </Head>
-      <div className="w-full lg:w-5/12 mx-auto px-4 lg:px-12 py-4 flex flex-col items-center justify-center relative">
+      <div className="w-full lg:w-4/12 mx-auto px-4 lg:px-12 py-4 flex flex-col items-center justify-center relative">
         <div className="absolute top-0 left-0 right-0 bg-white border-b flex items-center px-3 py-3">
           <Link href={routes.home()}>
-            <Image src="/images/logo.svg" width={120} height={28} />
+            <a>
+              <Image src="/images/logo.svg" width={120} height={28} />
+            </a>
           </Link>
           <AiOutlineMenu
             className="ml-auto text-2xl"
             onClick={() => setIsOpen(true)}
           />
         </div>
-        <div className="pt-16">{authState === 'authenticated' && children}</div>
+        <div className="pt-16 w-full">
+          {authState === 'authenticated' && children}
+        </div>
         <Modal title="Menu" isOpen={isOpen} onClose={() => setIsOpen(false)}>
           {menuRoutes.map((i) => (
-            <Link href={i.pathname}>
+            <Link href={i.pathname} key={i.pathname}>
               <a
                 className={cn(
                   'relative text-gray-900 py-2 pl-10 pr-4 hover:bg-blue-500 hover:bg-opacity-20 rounded block',
@@ -65,7 +71,7 @@ const DefaultLayout: FC = ({ children }) => {
           ))}
         </Modal>
       </div>
-    </>
+    </QueryClientProvider>
   );
 };
 

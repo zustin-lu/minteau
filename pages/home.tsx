@@ -22,7 +22,7 @@ function Home() {
       </Header>
       <div className="space-y-2 text-gray-700">
         {menuRoutes.map((i) => (
-          <Link href={i.pathname}>
+          <Link href={i.pathname} key={i.pathname}>
             <a className="block py-3 px-4 rounded bg-gray-300 bg-opacity-10">
               {i.text}
             </a>
