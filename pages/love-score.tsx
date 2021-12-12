@@ -96,7 +96,7 @@ function LoveScore() {
           className="mt-2"
           onClick={() => toast.error('Hết vé! Vé đã được mua bởi Chou yangho')}
         >
-          1000mt / vé (only one)
+          1000mt / vé (sắp hết)
         </Button>
       </div>
 
