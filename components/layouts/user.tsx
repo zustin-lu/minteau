@@ -12,7 +12,7 @@ import { useAuth, useMenu } from 'hooks';
 import { routes } from 'constant';
 import { Modal } from 'components';
 
-const DefaultLayout: FC = ({ children }) => {
+const UserLayout: FC = ({ children }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const queryClient = useMemo(() => new QueryClient(), []);
@@ -27,6 +27,10 @@ const DefaultLayout: FC = ({ children }) => {
 
   const { menuRoutes } = useMenu();
 
+  if (authState !== 'authenticated') {
+    return null;
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <Head>
@@ -35,7 +39,7 @@ const DefaultLayout: FC = ({ children }) => {
       <div className="w-full lg:w-4/12 mx-auto px-4 lg:px-12 py-4 flex flex-col items-center justify-center relative">
         <div className="absolute top-0 left-0 right-0 bg-white border-b flex items-center px-3 py-3">
           <Link href={routes.home()}>
-            <a>
+            <a className="flex items-center">
               <Image src="/images/logo.svg" width={120} height={28} />
             </a>
           </Link>
@@ -75,4 +79,4 @@ const DefaultLayout: FC = ({ children }) => {
   );
 };
 
-export default DefaultLayout;
+export default UserLayout;

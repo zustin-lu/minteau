@@ -1,7 +1,12 @@
-import { FC } from 'react';
+import { FC, ComponentPropsWithRef, forwardRef } from 'react';
+import cn from 'classnames';
 
-const Paragraph: FC = ({ children }) => {
-  return <p className="text-gray-800 leading-7 mb-3">{children}</p>;
+type Props = ComponentPropsWithRef<'p'>;
+
+const Paragraph: FC<Props> = ({ children, className }) => {
+  return (
+    <p className={cn('text-gray-800 leading-7 mb-3', className)}>{children}</p>
+  );
 };
 
 export default Paragraph;

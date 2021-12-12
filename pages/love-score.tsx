@@ -34,6 +34,8 @@ function LoveScore() {
     },
   });
 
+  const { isDirty, isSubmitting } = useFormState({ control });
+
   const submitHandler: SubmitHandler<Fields> = async (data) => {
     const convertPoint = purposeRef.current === 'increase' ? 1 : -1;
     mutation.mutate(
@@ -73,11 +75,28 @@ function LoveScore() {
         <Image src="/images/love-score.svg" layout="fill" />
       </div>
       <Header className="text-yellow-800 text-center">
-        Yangho cho xin ít điểm coiii
+        Tiết kiệm mua vé nàoo
       </Header>
       <div className="py-3 text-center font-semibold text-6xl text-yellow-500 mb-6">
-        {isLoading ? 'Đang load nhó' : data.data?.payload?.totalScore}
+        {isLoading ? 'Đang load nhó' : data.data?.payload?.totalScore + 'mt'}
       </div>
+
+      <div className="bg-yellow-400 text-yellow-600 bg-opacity-20 py-4 px-3 rounded-md mb-4">
+        <div className="flex items-center">
+          Vé một chiều{' '}
+          <a
+            href="https://tre.vtc.vn/tra-tu-love-you-to-the-moon-and-back-mang-y-nghia-gi-ma-nghe-lang-man-vay-ar604924.html"
+            target="_blank"
+            className="inline-block underline ml-2"
+          >
+            Love you to the moon and back
+          </a>
+        </div>
+        <Button className="mt-2" disabled>
+          1000mt / vé (comming soon)
+        </Button>
+      </div>
+
       <form
         onSubmit={handleSubmit(submitHandler)}
         className="grid grid-cols-12 gap-3 mb-6"
@@ -121,12 +140,14 @@ function LoveScore() {
           <Button
             type="submit"
             onClick={() => (purposeRef.current = 'increase')}
+            disabled={isSubmitting || !isDirty}
           >
             Thêm điểm
           </Button>
           <Button
             type="submit"
             onClick={() => (purposeRef.current = 'decrease')}
+            disabled={isSubmitting || !isDirty}
           >
             Trừ điểm
           </Button>

@@ -16,8 +16,8 @@ function ChanceQuestion() {
       <Header variant="head4">Đôi lời xàm xí,</Header>
       <Paragraph>
         Hm... Em đã bước qua một vài câu chuyện buồn, và vài điều không đáng để
-        nhớ. Anh ở đây mong được làm bạn với em, làm trò cùng em mong một ngày
-        nào đó cho em có được một câu chuyện tốt đẹp hơn 👊🏼👊🏼
+        nhớ. Anh ở đây mong được làm bồ không tèo của em, làm trò cùng em, mong
+        một ngày nào đó cho em có được một câu chuyện tốt đẹp hơn 👊🏼👊🏼
       </Paragraph>
 
       <div className="relative mainImg mx-auto mb-4">
@@ -42,10 +42,10 @@ function ChanceQuestion() {
             Xứng đáng có 01 cơ hội 😂
           </Button>
         ) : (
-          <Paragraph>
+          <Paragraph className="col-span-2">
             Chúc em thi tốt!!
             <br />
-            Có phúc long và có cả anh 😜
+            Có trà vải phúc long và có cả minthon 😜
           </Paragraph>
         )}
         {showNo && (

@@ -14,7 +14,7 @@ function Home() {
 
   return (
     <>
-      <div className="relative mainImg mb-4">
+      <div className="relative mainImg mb-4 mx-auto">
         <Image src="/images/home.svg" layout="fill" />
       </div>
       <Header variant="head2" className="text-center">
@@ -38,7 +38,7 @@ function Home() {
         @media (min-width: 768px) {
           .mainImg {
             width: 18vw;
-            height: 12vw;
+            height: 13vw;
           }
         }
       `}</style>
