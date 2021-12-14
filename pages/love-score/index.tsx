@@ -12,7 +12,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import cn from 'classnames';
 
-import UserLayout from 'components/layouts/user';
+import UserLayout from 'components/layoutUser';
 import { Input, Button, Header, Paragraph } from 'components';
 import { apiClient, toast } from 'helpers';
 import { routes } from 'constant';

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 import { routes } from 'constant';
-import UserLayout from 'components/layouts/user';
+import UserLayout from 'components/layoutUser';
 import { Button, Header, Paragraph } from 'components';
 
 function ChanceQuestion() {

@@ -6,10 +6,12 @@ import { connectDB } from 'database';
 import { apiMethodStream } from 'helpers';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { LMINT_PWD, MINTEAU_PWD } = process.env;
   apiMethodStream(req, {
     POST({ makeResponse }) {
-      const rootPwd = process.env.USER_PWD;
-      const inputPwd = req.body.pwd;
+      const { pwd: inputPwd, user } = req.body;
+      const isMinteau = user === 'minteau';
+      const rootPwd = isMinteau ? MINTEAU_PWD : LMINT_PWD;
 
       let response: ReturnType<typeof makeResponse>;
 
@@ -21,6 +23,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         response = makeResponse({
           payload: {
             expiredAt: dayjs().add(1, 'h').toISOString(),
+            user,
+            avatarUrl: isMinteau
+              ? '/images/minteau.jpeg'
+              : '/images/lmint.jpeg',
           },
         });
       }

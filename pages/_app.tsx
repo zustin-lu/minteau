@@ -2,6 +2,7 @@ import { Toaster } from 'react-hot-toast';
 import type { AppProps } from 'next/app';
 import type { NextPage } from 'next';
 import type { ReactElement, ReactNode } from 'react';
+import { RecoilRoot } from 'recoil';
 
 import '../public/styles/globals.css';
 
@@ -17,11 +18,15 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  return getLayout(
-    <>
-      <Component {...pageProps} />
-      <Toaster />
-    </>
+  return (
+    <RecoilRoot>
+      {getLayout(
+        <>
+          <Component {...pageProps} />
+          <Toaster />
+        </>
+      )}
+    </RecoilRoot>
   );
 }
 

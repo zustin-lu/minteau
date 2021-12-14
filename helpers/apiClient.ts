@@ -6,7 +6,7 @@ const apiInstance = axios.create({
 
 const apiClient = {
   post: {
-    auth: (params: { pwd: string }) => apiInstance.post('/auth', params),
+    auth: (params: { pwd: string, user: string }) => apiInstance.post('/auth', params),
     loveScore: (params: { score: number; reason: string }) => apiInstance.post('/love-score', params),
   },
   get: {

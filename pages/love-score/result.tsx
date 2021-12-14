@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import ContentLoader from 'react-content-loader';
 import cn from 'classnames';
 
-import UserLayout from 'components/layouts/user';
+import UserLayout from 'components/layoutUser';
 import { Button } from 'components';
 import { apiClient, getReadableDate } from 'helpers';
 import { useRouter } from 'next/router';

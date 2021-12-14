@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import UserLayout from 'components/layouts/user';
-import { Modal, Button, Header } from 'components';
+import UserLayout from 'components/layoutUser';
+import { Header, CountDown } from 'components';
 import { useMenu } from 'hooks';
 
 function Home() {
@@ -18,7 +18,7 @@ function Home() {
         <Image src="/images/home.svg" layout="fill" />
       </div>
       <Header variant="head2" className="text-center">
-        Chou đi đâu đấy?
+        <CountDown />
       </Header>
       <div className="space-y-2 text-gray-700">
         {menuRoutes.map((i) => (

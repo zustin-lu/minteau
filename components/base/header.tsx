@@ -21,7 +21,7 @@ const Header: FC<Props> = ({
   ...rest
 }) => {
   return (
-    <div {...rest} className={cn(variants[variant], className)}>
+    <div {...rest} className={cn('text-gray-800', variants[variant], className)}>
       {children}
     </div>
   );

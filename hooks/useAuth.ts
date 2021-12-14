@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 
 import { localStorage } from 'helpers';
 import { routes } from 'constant';
+import { globalStates } from 'store';
 
 type AuthStates = 'idle' | 'authenticated' | 'guess';
 type UseAuthOptions = Partial<{
@@ -11,13 +13,19 @@ type UseAuthOptions = Partial<{
 }> | null;
 
 function useAuth({ onAuthStateChange }: UseAuthOptions = {}) {
-  const [authState, setAuthState] = useState<AuthStates>('idle');
   const router = useRouter();
 
+  const [authState, setAuthState] = useState<AuthStates>('idle');
+  const setAuthRecoilState = useSetRecoilState(globalStates.auth);
+
   useEffect(() => {
-    const expiredTime = localStorage.get('authExpiredAt');
-    const isAuth = expiredTime && dayjs().isBefore(expiredTime);
-    setAuthState(isAuth ? 'authenticated' : 'guess');
+    const value = localStorage.get('authInfo');
+    if (value) {
+      const { expiredAt, ...rest } = value;
+      const isAuth = dayjs().isBefore(expiredAt);
+      setAuthRecoilState(rest);
+      setAuthState(isAuth ? 'authenticated' : 'guess');
+    }
   }, []);
 
   useEffect(() => {
@@ -27,7 +35,7 @@ function useAuth({ onAuthStateChange }: UseAuthOptions = {}) {
   }, [authState]);
 
   const logOut = () => {
-    localStorage.remove('authExpiredAt');
+    localStorage.clear();
     router.replace(routes.auth());
   };
 
