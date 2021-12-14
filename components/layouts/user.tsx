@@ -10,14 +10,14 @@ import cn from 'classnames';
 
 import { useAuth, useMenu } from 'hooks';
 import { routes } from 'constant';
-import { Modal } from 'components';
+import { Button, Modal } from 'components';
 
 const UserLayout: FC = ({ children }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const queryClient = useMemo(() => new QueryClient(), []);
 
-  const { authState } = useAuth({
+  const { authState, logOut } = useAuth({
     onAuthStateChange(state) {
       if (state === 'guess') {
         router.replace(routes.auth());
@@ -73,6 +73,9 @@ const UserLayout: FC = ({ children }) => {
               </a>
             </Link>
           ))}
+          <Button variant="error" className="ml-auto mt-3" onClick={logOut}>
+            Đăng xuất
+          </Button>
         </Modal>
       </div>
     </QueryClientProvider>
