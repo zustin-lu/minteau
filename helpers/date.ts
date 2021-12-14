@@ -11,6 +11,13 @@ dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
 dayjs.extend(objectSupport);
 
-export function getReadableDate(date: string | Date, format: string = 'MM/DD/YYYY h:mm A') {
+export function getReadableDate(
+  date: string | Date,
+  format: string = 'MM/DD/YYYY h:mm A'
+) {
   return dayjs(date).format(format);
+}
+
+export function numberZeroPrefix(num: number): string {
+  return ('0' + num).slice(-2);
 }
