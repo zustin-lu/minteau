@@ -11,6 +11,7 @@ const apiClient = {
   },
   get: {
     loveScore: () => apiInstance.get('/love-score'),
+    loveScoreResult: () => apiInstance.get('/love-score/result'),
   },
 };
 

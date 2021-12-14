@@ -36,8 +36,8 @@ const UserLayout: FC = ({ children }) => {
       <Head>
         <title>For Minteau</title>
       </Head>
-      <div className="w-full lg:w-4/12 mx-auto px-4 lg:px-12 py-4 flex flex-col items-center justify-center relative">
-        <div className="absolute top-0 left-0 right-0 bg-white border-b flex items-center px-3 py-3">
+      <div className="w-full lg:w-4/12 mx-auto px-4 lg:px-8 py-4 flex flex-col items-center justify-center relative">
+        <div className="sticky top-0 left-0 right-0 w-full bg-white border-b flex items-center px-3 py-3 z-50">
           <Link href={routes.home()}>
             <a className="flex items-center">
               <Image src="/images/logo.svg" width={120} height={28} />
@@ -48,7 +48,7 @@ const UserLayout: FC = ({ children }) => {
             onClick={() => setIsOpen(true)}
           />
         </div>
-        <div className="pt-16 w-full">
+        <div className="pt-6 w-full">
           {authState === 'authenticated' && children}
         </div>
         <Modal title="Menu" isOpen={isOpen} onClose={() => setIsOpen(false)}>

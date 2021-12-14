@@ -10,3 +10,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
 dayjs.extend(objectSupport);
+
+export function getReadableDate(date: string | Date, format: string = 'MM/DD/YYYY h:mm A') {
+  return dayjs(date).format(format);
+}

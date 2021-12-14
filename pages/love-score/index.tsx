@@ -9,11 +9,13 @@ import {
 } from 'react-hook-form';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import Image from 'next/image';
+import Link from 'next/link';
 import cn from 'classnames';
 
 import UserLayout from 'components/layouts/user';
 import { Input, Button, Header, Paragraph } from 'components';
 import { apiClient, toast } from 'helpers';
+import { routes } from 'constant';
 
 type Fields = {
   score: number | '';
@@ -81,9 +83,9 @@ function LoveScore() {
         {isLoading ? 'Đang load nhó' : data.data?.payload?.totalScore + 'mt'}
       </div>
 
-      <div className="bg-yellow-400 text-yellow-600 bg-opacity-20 py-4 px-3 rounded-md mb-4">
+      <div className="bg-green-300 text-green-600 bg-opacity-20 py-4 px-3 rounded-lg mb-4">
         <div className="flex items-center">
-          Vé một chiều{' '}
+          Đã mua vé một chiều
           <a
             href="https://tre.vtc.vn/tra-tu-love-you-to-the-moon-and-back-mang-y-nghia-gi-ma-nghe-lang-man-vay-ar604924.html"
             target="_blank"
@@ -92,12 +94,6 @@ function LoveScore() {
             Love you to the moon and back
           </a>
         </div>
-        <Button
-          className="mt-2"
-          onClick={() => toast.error('Hết vé! Vé đã được mua bởi Chou yangho')}
-        >
-          1000mt / vé (sắp hết)
-        </Button>
       </div>
 
       <form
@@ -144,6 +140,7 @@ function LoveScore() {
             type="submit"
             onClick={() => (purposeRef.current = 'increase')}
             disabled={isSubmitting || !isDirty}
+            variant="success"
           >
             Thêm điểm
           </Button>
@@ -151,11 +148,16 @@ function LoveScore() {
             type="submit"
             onClick={() => (purposeRef.current = 'decrease')}
             disabled={isSubmitting || !isDirty}
+            variant="error"
           >
             Trừ điểm
           </Button>
         </div>
       </form>
+
+      <Link href={routes.loveScoreResult()}>
+        <a className="block mb-6 underline text-blue-700 text-center">Xem kết quả</a>
+      </Link>
 
       <Disclosure>
         {({ open }) => (
