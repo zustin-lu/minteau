@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
 import {
   useForm,
   SubmitHandler,
@@ -12,7 +11,7 @@ import Image from 'next/image';
 import { apiClient, toast, localStorage } from 'helpers';
 import { routes } from 'constant';
 import { Button, Input } from 'components';
-import { globalStates } from 'store';
+import { useAuth } from 'hooks';
 
 type Fields = {
   pwd: string;
@@ -20,7 +19,7 @@ type Fields = {
 
 const LoginForm: FC = () => {
   const router = useRouter();
-  const [authState, setAuthState] = useRecoilState(globalStates.auth);
+  const { authState, resetAuth } = useAuth();
 
   const { control, handleSubmit, reset, setFocus } = useForm<Fields>({
     defaultValues: { pwd: '' },
@@ -96,10 +95,7 @@ const LoginForm: FC = () => {
       >
         Đăng nhập
       </Button>
-      <Button
-        className="w-full"
-        onClick={() => setAuthState({ avatarUrl: null, user: null })}
-      >
+      <Button className="w-full" onClick={resetAuth}>
         Quay về
       </Button>
     </form>

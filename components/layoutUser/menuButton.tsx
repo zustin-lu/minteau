@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { HiCheck } from 'react-icons/hi';
 import Link from 'next/link';
@@ -7,14 +6,12 @@ import cn from 'classnames';
 
 import { useAuth, useMenu } from 'hooks';
 import { Button, Modal } from 'components';
-import { globalStates } from 'store';
 
 const MenuButton: FC = () => {
   const { menuRoutes } = useMenu();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const authState = useRecoilValue(globalStates.auth);
 
-  const { logOut } = useAuth();
+  const { logOut, authState } = useAuth();
 
   return (
     <>
@@ -31,7 +28,7 @@ const MenuButton: FC = () => {
           <Link href={i.pathname} key={i.pathname}>
             <a
               className={cn(
-                'relative text-gray-900 py-2 pl-10 pr-4 hover:bg-blue-500 hover:bg-opacity-20 rounded block',
+                'relative text-gray-900 py-2 pl-10 pr-4 hover:bg-blue-500 hover:bg-opacity-20 rounded block outline-none',
                 i.isActive && 'bg-blue-500 bg-opacity-10'
               )}
             >

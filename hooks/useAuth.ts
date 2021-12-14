@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 
 import { localStorage } from 'helpers';
@@ -15,8 +15,8 @@ type UseAuthOptions = Partial<{
 function useAuth({ onAuthStateChange }: UseAuthOptions = {}) {
   const router = useRouter();
 
-  const [authState, setAuthState] = useState<AuthStates>('idle');
-  const setAuthRecoilState = useSetRecoilState(globalStates.auth);
+  const [status, setStatus] = useState<AuthStates>('idle');
+  const [authState, setAuthRecoilState] = useRecoilState(globalStates.auth);
 
   useEffect(() => {
     const value = localStorage.get('authInfo');
@@ -24,22 +24,26 @@ function useAuth({ onAuthStateChange }: UseAuthOptions = {}) {
       const { expiredAt, ...rest } = value;
       const isAuth = dayjs().isBefore(expiredAt);
       setAuthRecoilState(rest);
-      setAuthState(isAuth ? 'authenticated' : 'guess');
+      setStatus(isAuth ? 'authenticated' : 'guess');
     }
   }, []);
 
   useEffect(() => {
     if (onAuthStateChange) {
-      onAuthStateChange(authState);
+      onAuthStateChange(status);
     }
-  }, [authState]);
+  }, [status]);
 
   const logOut = () => {
     localStorage.clear();
     router.replace(routes.auth());
   };
 
-  return { authState, logOut };
+  const resetAuth = () => {
+    setAuthRecoilState({ avatarUrl: null, user: null });
+  };
+
+  return { authState: { status, ...authState }, logOut, resetAuth };
 }
 
 export default useAuth;

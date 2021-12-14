@@ -1,12 +1,11 @@
 import { FC } from 'react';
-import { useRecoilValue } from 'recoil';
 
 import AccountOption from './accountOption';
 import { Header, Paragraph } from 'components';
-import { globalStates } from 'store';
+import { useAuth } from 'hooks';
 
 const AuthSelect: FC = () => {
-  const authState = useRecoilValue(globalStates.auth);
+  const { authState } = useAuth();
 
   if (authState.user) {
     return null;

@@ -17,7 +17,7 @@ function Auth() {
     },
   });
 
-  if (authState === 'authenticated') {
+  if (authState.status === 'authenticated') {
     return null;
   }
 

@@ -22,7 +22,7 @@ const UserLayout: FC = ({ children }) => {
     },
   });
 
-  if (authState !== 'authenticated') {
+  if (authState.status !== 'authenticated') {
     return null;
   }
 
@@ -31,7 +31,7 @@ const UserLayout: FC = ({ children }) => {
       <Head>
         <title>For Minteau</title>
       </Head>
-      <div className="w-full lg:w-4/12 mx-auto px-4 lg:px-8 py-4 flex flex-col items-center justify-center relative">
+      <div className="w-full lg:w-4/12 mx-auto px-4 lg:px-8 pb-4 flex flex-col items-center justify-center relative">
         <div className="sticky top-0 left-0 right-0 w-full bg-white border-b flex items-center px-3 py-3 z-10">
           <Link href={routes.home()}>
             <a className="flex items-center">
@@ -41,7 +41,7 @@ const UserLayout: FC = ({ children }) => {
           <MenuButton />
         </div>
         <div className="pt-6 w-full">
-          {authState === 'authenticated' && children}
+          {authState.status === 'authenticated' && children}
         </div>
       </div>
     </QueryClientProvider>
