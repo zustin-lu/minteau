@@ -25,6 +25,8 @@ function useAuth({ onAuthStateChange }: UseAuthOptions = {}) {
       const isAuth = dayjs().isBefore(expiredAt);
       setAuthRecoilState(rest);
       setStatus(isAuth ? 'authenticated' : 'guess');
+    } else {
+      router.replace(routes.auth());
     }
   }, []);
 
