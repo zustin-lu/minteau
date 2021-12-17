@@ -39,8 +39,8 @@ const Countdown: FC = () => {
   return (
     <div className="text-gray-700">
       <Header variant="head3">Doublemint gặp nhau</Header>
-      <Header variant="head1" className="mb-2">{numberZeroPrefix(value.days)} ngày</Header>
-      <div className="text-base">
+      <Header variant="head1" className="mb-0">{numberZeroPrefix(value.days)} ngày</Header>
+      <div className="text-base mt-3">
         {numberZeroPrefix(value.hours)} giờ {numberZeroPrefix(value.minutes)}{' '}
         phút {numberZeroPrefix(value.seconds)} giây
       </div>

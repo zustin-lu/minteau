@@ -2,12 +2,13 @@ import { toast as t } from 'react-hot-toast';
 
 const toast = {
   instance: t,
+  ...t,
   textOnly: (msg: string) => t.success(msg, { icon: '' }),
   success: (msg: string) => t.success(msg),
   error: (msg: string) => t.error(msg),
   warning: (msg: string) => t(msg, { icon: '⚠️' }),
   info: (msg: string) => t(msg, { icon: '😜' }),
-  promise: (myPromise: Promise<unknown>) =>
+  myPromise: (myPromise: Promise<unknown>) =>
     t.promise(
       myPromise,
       {

@@ -1,13 +1,13 @@
 import { FC, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-type Props = {
+export type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   title: string;
 };
 
-const Modal: FC<Props> = ({ isOpen, title, children, onClose }) => {
+const Modal: FC<ModalProps> = ({ isOpen, title, children, onClose }) => {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>

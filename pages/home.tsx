@@ -1,15 +1,13 @@
 import { ReactElement } from 'react';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
+import cn from 'classnames';
 
 import UserLayout from 'components/layoutUser';
 import { Header, CountDown } from 'components';
 import { useMenu } from 'hooks';
 
 function Home() {
-  const router = useRouter();
-
   const { menuRoutes } = useMenu({ removeCurrentPage: true });
 
   return (
@@ -23,7 +21,14 @@ function Home() {
       <div className="space-y-2 text-gray-700">
         {menuRoutes.map((i) => (
           <Link href={i.pathname} key={i.pathname}>
-            <a className="block py-3 px-4 rounded bg-gray-300 bg-opacity-10">
+            <a
+              className={cn(
+                'block py-3 px-4 rounded',
+                i.isNew
+                  ? 'bg-blue-300 bg-opacity-20 border border-blue-300 text-blue-600'
+                  : 'bg-gray-300 bg-opacity-10'
+              )}
+            >
               {i.text}
             </a>
           </Link>

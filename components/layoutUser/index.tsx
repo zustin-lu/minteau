@@ -40,7 +40,7 @@ const UserLayout: FC = ({ children }) => {
           </Link>
           <MenuButton />
         </div>
-        <div className="pt-6 w-full">
+        <div className="pt-4 w-full">
           {authState.status === 'authenticated' && children}
         </div>
       </div>

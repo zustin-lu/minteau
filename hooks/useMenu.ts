@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 type MenuRouteItem = {
   text: string;
   pathname: string;
+  isNew?: boolean;
 };
 
 type Input = {
@@ -18,6 +19,7 @@ const menuRoutes: MenuRouteItem[] = [
   { text: 'Trang chủ', pathname: routes.home() },
   { text: 'Trò mèo đầu tiên của lmint', pathname: routes.greeting() },
   { text: 'Máy tính điểm của Boss Chou', pathname: routes.loveScore() },
+  { text: 'Tường nhà chúng mình', pathname: routes.newFeeds(), isNew: true },
 ];
 
 function useMenu({ removeCurrentPage }: Input = {}): Output {

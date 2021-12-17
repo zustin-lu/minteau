@@ -96,7 +96,7 @@ const LoginForm: FC = () => {
         Đăng nhập
       </Button>
       <Button className="w-full" onClick={resetAuth}>
-        Quay về
+        Chọn tài khoản khác
       </Button>
     </form>
   );
