@@ -13,7 +13,7 @@ dayjs.extend(objectSupport);
 
 export function getReadableDate(
   date: string | Date,
-  format: string = 'MM/DD/YYYY h:mm A'
+  format: string = 'DD/MM/YYYY h:mm A'
 ) {
   return dayjs(date).format(format);
 }

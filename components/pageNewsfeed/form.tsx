@@ -67,10 +67,11 @@ const NewsfeedForm: FC<Props> = ({ onSubmited }) => {
   return (
     <>
       <label htmlFor="uploadInput">
-        <div className="inline-flex justify-center items-center space-x-2 px-4 py-2 text-sm font-medium rounded-md bg-opacity-20 bg-gray-400 text-gray-600 mb-3">
+        <div className="inline-flex justify-center items-center space-x-2 px-4 py-2 text-sm font-medium rounded-md bg-opacity-20 bg-gray-400 text-gray-600 mb-2">
           <AiOutlinePicture />
           <span>Thêm ảnh</span>
         </div>
+        <div className="text-xs mb-3 text-gray-500">Chọn được nhiều ảnh cùng lúc rồi ớ bạn iu ❤️</div>
         <input
           className="w-0 h-0 hidden"
           id="uploadInput"
