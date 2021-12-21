@@ -40,9 +40,9 @@ const NewsfeedForm: FC<Props> = ({ onSubmited }) => {
   const previews = useImagePreview(watch('images'));
 
   const handleFileChange = async (e) => {
-    const newFile = e.target.files[0];
+    const newFiles = e.target.files;
     const images = getValues('images');
-    setValue('images', [...images, newFile]);
+    setValue('images', [...images, ...newFiles]);
   };
 
   const handleSubmit = () => {
@@ -76,7 +76,7 @@ const NewsfeedForm: FC<Props> = ({ onSubmited }) => {
           id="uploadInput"
           type="file"
           accept="image/*"
-          multiple={false}
+          multiple
           onChange={handleFileChange}
         />
       </label>

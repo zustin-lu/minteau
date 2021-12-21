@@ -17,7 +17,7 @@ export const config = {
 };
 
 const route = nc();
-route.use(cloudinaryMiddleware.array('images', 12));
+route.use(cloudinaryMiddleware.array('images', 100));
 
 route.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const newFeed = new FeedModel({
