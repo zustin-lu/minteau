@@ -52,7 +52,12 @@ const Modal: FC<ModalProps> = ({ isOpen, title, children, onClose }) => {
                 >
                   {title}
                 </Dialog.Title>
-                <div className="mt-2 text-sm text-gray-700">{children}</div>
+                <div
+                  className="mt-2 text-sm text-gray-700 overflow-y-auto"
+                  style={{ maxHeight: '70vh' }}
+                >
+                  {children}
+                </div>
               </div>
             </Transition.Child>
           </div>
