@@ -2,32 +2,13 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 import nc from 'next-connect';
 
-import {
-  connectDB,
-  cloudinaryMiddleware,
-  cloudinaryDelete,
-  FeedModel,
-} from 'database';
+import { connectDB, cloudinaryDelete, FeedModel } from 'database';
 import { makeResponse } from 'helpers';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 const route = nc();
-route.use(cloudinaryMiddleware.array('images', 100));
 
 route.post(async (req: NextApiRequest, res: NextApiResponse) => {
-  const newFeed = new FeedModel({
-    ...req.body,
-    pictures: (req as any).files?.map((item) => ({
-      url: item.path,
-      public_id: item.filename,
-    })),
-  });
-
+  const newFeed = new FeedModel({ ...req.body });
   let response: ReturnType<typeof makeResponse>;
 
   try {
@@ -37,6 +18,10 @@ route.post(async (req: NextApiRequest, res: NextApiResponse) => {
       payload: newFeed,
     });
   } catch (err) {
+    const { pictures } = req.body;
+    await Promise.all(
+      pictures.map(({ public_id }) => cloudinaryDelete(public_id))
+    );
     response = makeResponse({
       code: StatusCodes.INTERNAL_SERVER_ERROR,
       reasonPhrase: ReasonPhrases.INTERNAL_SERVER_ERROR,
@@ -45,6 +30,7 @@ route.post(async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   res.status(response.code).json(response);
+  res.end();
 });
 
 route.get(async (req: NextApiRequest, res: NextApiResponse) => {

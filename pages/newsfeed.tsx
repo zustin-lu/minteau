@@ -1,13 +1,13 @@
 import { ReactElement } from 'react';
 
 import UserLayout from 'components/layoutUser';
-import { CreateFeedBtn, NewsBoard } from 'components/pageNewsfeed';
+import { CreateFeedBtn, List } from 'components/pageNewsfeed';
 
 function Newsfeed() {
   return (
     <div className="px-3">
       <CreateFeedBtn />
-      <NewsBoard />
+      <List />
     </div>
   );
 }

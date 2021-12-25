@@ -4,7 +4,7 @@ import { AiOutlinePicture, AiFillCloseCircle } from 'react-icons/ai';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { apiClient, toast } from 'helpers';
-import { useAuth, useImagePreview } from 'hooks';
+import { useAuth, useImagePreview, useCloudinaryClient } from 'hooks';
 import { Button } from 'components';
 
 type Fields = {
@@ -24,6 +24,8 @@ const NewsfeedForm: FC<Props> = ({ onSubmited }) => {
         caption: '',
       },
     });
+
+  const { upload, isUploading } = useCloudinaryClient();
 
   const { authState } = useAuth();
   const queryClient = useQueryClient();
@@ -45,17 +47,20 @@ const NewsfeedForm: FC<Props> = ({ onSubmited }) => {
     setValue('images', [...images, ...newFiles]);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const imageValues = getValues('images');
     const captionValue = getValues('caption');
-
-    const formData = new FormData();
-    for (const file of imageValues) {
-      formData.append('images', file as any);
+    try {
+      const pictureResponses = await upload(imageValues);
+      mutation.mutate({
+        caption: captionValue,
+        author: authState.user,
+        pictures: pictureResponses,
+      });
+    } catch (err) {
+      console.error(err);
+      toast.error('Ụiii bị lỗi rùi, nhắn cho lmint kêu hắn sửa đi nhó');
     }
-    formData.append('caption', captionValue);
-    formData.append('author', authState.user);
-    mutation.mutate(formData);
   };
 
   const handleRemoveImage = (idx: number) => {
@@ -64,6 +69,8 @@ const NewsfeedForm: FC<Props> = ({ onSubmited }) => {
     setValue('images', images);
   };
 
+  const isCreating = mutation.isLoading || isUploading;
+
   return (
     <>
       <label htmlFor="uploadInput">
@@ -71,7 +78,9 @@ const NewsfeedForm: FC<Props> = ({ onSubmited }) => {
           <AiOutlinePicture />
           <span>Thêm ảnh</span>
         </div>
-        <div className="text-xs mb-3 text-gray-500">Chọn được nhiều ảnh cùng lúc rồi ớ bạn iu ❤️</div>
+        <div className="text-xs mb-3 text-gray-500">
+          Chọn được nhiều ảnh cùng lúc rồi ớ bạn iu ❤️
+        </div>
         <input
           className="w-0 h-0 hidden"
           id="uploadInput"
@@ -106,10 +115,10 @@ const NewsfeedForm: FC<Props> = ({ onSubmited }) => {
       <Button
         onClick={handleSubmit}
         variant="info"
-        disabled={mutation.isLoading || !formState.isDirty}
+        disabled={isCreating || !formState.isDirty}
         className="ml-auto mt-3"
       >
-        {mutation.isLoading ? 'Đang tạo ...' : 'Tạo bài viết'}
+        {isCreating ? 'Đang tạo ...' : 'Tạo bài viết'}
       </Button>
     </>
   );

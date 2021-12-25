@@ -2,10 +2,8 @@ import { FC } from 'react';
 import { useQuery } from 'react-query';
 import ContentLoader from 'react-content-loader';
 
-import { useAuth } from 'hooks';
-import { apiClient, getReadableDate } from 'helpers';
-import Slider from './slider';
-import DeleteBtn from './deleteBtn';
+import { apiClient } from 'helpers';
+import Item from './item';
 
 const Loader = (props) => (
   <ContentLoader viewBox="0 0 500 280" height={280} width={500} {...props}>
@@ -18,7 +16,6 @@ const Loader = (props) => (
 
 const NewsBoard: FC = () => {
   const { data, isLoading } = useQuery('newsfeed', apiClient.get.feeds);
-  const { authState } = useAuth();
 
   if (isLoading) {
     return (
@@ -33,19 +30,7 @@ const NewsBoard: FC = () => {
   return (
     <div className="mt-3 space-y-6">
       {payload.map((item) => (
-        <div className="bg-white shadow-lg p-4" key={item._id}>
-          {Boolean(item?.pictures?.length) && (
-            <Slider pictures={item.pictures} />
-          )}
-          <div className="text-xs text-gray-500 mb-1">
-            {getReadableDate(item.updatedAt)} -{' '}
-            <span className="capitalize">{item.author}</span>
-          </div>
-          <div className="font-light text-gray-600 whitespace-pre-line">
-            {item.caption}
-          </div>
-          {authState.user === item.author && <DeleteBtn id={item._id} />}
-        </div>
+        <Item item={item} key={item._id} />
       ))}
     </div>
   );
