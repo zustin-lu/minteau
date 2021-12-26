@@ -35,7 +35,7 @@ const FeedSlider: FC<Props> = ({ pictures }) => {
           <button
             className="absolute right-3 top-1/2 text-2xl text-gray-500 bg-white bg-opacity-40 w-10 h-10 flex items-center justify-center rounded-full"
             onClick={(e: any) =>
-              e.stopPropagation() || instanceRef.current?.prev()
+              e.stopPropagation() || instanceRef.current?.next()
             }
           >
             <AiOutlineRight />
@@ -43,7 +43,7 @@ const FeedSlider: FC<Props> = ({ pictures }) => {
           <button
             className="absolute left-3 top-1/2 text-2xl text-gray-500 bg-white bg-opacity-40 w-10 h-10 flex items-center justify-center rounded-full"
             onClick={(e: any) =>
-              e.stopPropagation() || instanceRef.current?.next()
+              e.stopPropagation() || instanceRef.current?.prev()
             }
           >
             <AiOutlineLeft />
