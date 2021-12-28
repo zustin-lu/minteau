@@ -25,7 +25,7 @@ const FeedSlider: FC<Props> = ({ pictures }) => {
     <div className="relative bg-gray-50 mb-4">
       <div ref={slideRef} className="keen-slider">
         {pictures.map(({ url, public_id }) => (
-          <div key={public_id} className="keen-slider__slide">
+          <div key={public_id} className="keen-slider__slide flex items-center">
             <img src={url} style={{ maxWidth: '100%' }} />
           </div>
         ))}
