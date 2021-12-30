@@ -36,13 +36,15 @@ const FeedSlider: FC<Props> = ({ pictures }) => {
           </div>
         ))}
       </div>
-      <div className="absolute top-2 right-2 px-2 py-1 text-white text-xs bg-gray-600 bg-opacity-30 rounded-md">
-        {currentSlide}/{instanceRef.current?.track.details.length + 1}
-      </div>
+      {loaded && instanceRef.current && (
+        <div className="absolute top-2 right-2 px-2 py-1 text-white text-xs bg-gray-600 bg-opacity-30 rounded-md">
+          {currentSlide}/{instanceRef.current?.track.details.length + 1}
+        </div>
+      )}
       {pictures?.length > 1 && loaded && instanceRef.current && (
         <>
           <button
-            className="absolute right-3 top-1/2 text-lg text-gray-500 bg-white bg-opacity-30 w-7 h-7 flex items-center justify-center rounded-full"
+            className="absolute right-3 top-1/2 text-lg bg-gray-600 bg-opacity-30 w-7 h-7 flex items-center justify-center rounded-full text-white"
             onClick={(e: any) =>
               e.stopPropagation() || instanceRef.current?.next()
             }
@@ -50,7 +52,7 @@ const FeedSlider: FC<Props> = ({ pictures }) => {
             <AiOutlineRight />
           </button>
           <button
-            className="absolute left-3 top-1/2 text-lg text-gray-500 bg-white bg-opacity-30 w-7 h-7 flex items-center justify-center rounded-full"
+            className="absolute left-3 top-1/2 text-lg bg-gray-600 bg-opacity-30 w-7 h-7 flex items-center justify-center rounded-full text-white"
             onClick={(e: any) =>
               e.stopPropagation() || instanceRef.current?.prev()
             }
