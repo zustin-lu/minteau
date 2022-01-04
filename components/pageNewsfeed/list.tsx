@@ -20,7 +20,6 @@ const NewsBoard: FC = () => {
 
   const {
     data,
-    isLoading,
     fetchNextPage,
     hasNextPage,
     isFetching,

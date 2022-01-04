@@ -13,7 +13,7 @@ const apiClient = {
   get: {
     loveScore: () => apiInstance.get('/love-score'),
     loveScoreResult: () => apiInstance.get('/love-score/result'),
-    feeds: ({ pageParam = 0 }) => apiInstance.get('/feed', { params: { page: pageParam + 1 }}),
+    feeds: ({ pageParam = 0 }) => apiInstance.get('/feed', { params: { page: pageParam === 0 ? 1 : pageParam }}),
   },
   delete: {
     feed: (id: string) => apiInstance.delete('/feed', { params: { id } }),
