@@ -62,9 +62,7 @@ const LoginForm: FC = () => {
       </div>
 
       <div className="text-sm font-normal text-gray-500 mt-6">
-        {isMinteau
-          ? 'Mật khẩu là nước uống yêu thích của em, viết liền không dấu'
-          : 'Mật khẩu là "iuchou"'}
+        Mời đồng chí nhập mật khẩu
       </div>
 
       <Controller

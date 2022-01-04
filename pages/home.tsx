@@ -12,8 +12,8 @@ function Home() {
 
   return (
     <>
-      <div className="relative mainImg mb-4 mx-auto">
-        <Image src="/images/home.svg" layout="fill" />
+      <div className="relative aspect-square w-1/2 mx-auto mb-6 rounded-full overflow-hidden">
+        <Image src="/images/couplemint.jpeg" layout="fill" />
       </div>
       <Header variant="head2" className="text-center">
         <CountDown />
@@ -23,7 +23,7 @@ function Home() {
           <Link href={i.pathname} key={i.pathname}>
             <a
               className={cn(
-                'block py-3 px-4 rounded',
+                'block p-4 rounded text-center',
                 i.isNew
                   ? 'bg-blue-300 bg-opacity-20 border border-blue-300 text-blue-600'
                   : 'bg-gray-300 bg-opacity-10'
@@ -34,19 +34,6 @@ function Home() {
           </Link>
         ))}
       </div>
-      <style jsx>{`
-        .mainImg {
-          width: 60vw;
-          height: 40vw;
-        }
-
-        @media (min-width: 768px) {
-          .mainImg {
-            width: 18vw;
-            height: 13vw;
-          }
-        }
-      `}</style>
     </>
   );
 }

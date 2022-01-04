@@ -18,7 +18,7 @@ const AuthSelect: FC = () => {
       <AccountOption avatarUrl="/images/lmint.jpeg" name="lmint" />
 
       <Paragraph className="text-center text-sm text-gray-400">
-        Doublemint ❤️
+        Vâng! Chúng tôi yêu nhau ❤️
       </Paragraph>
     </div>
   );
