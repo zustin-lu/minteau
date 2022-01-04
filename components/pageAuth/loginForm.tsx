@@ -74,13 +74,9 @@ const LoginForm: FC = () => {
         render={({ field }) => (
           <Input
             {...field}
-            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+            className="border rounded w-full text-gray-700 leading-tight"
             type="password"
-            placeholder={
-              isMinteau
-                ? 'Mời yangho nhập mật khẩu'
-                : 'Mời bồ không tèo của yangho nhập mật khẩu'
-            }
+            placeholder="Mật khẩu là giề"
           />
         )}
       />

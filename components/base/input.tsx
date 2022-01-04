@@ -13,7 +13,7 @@ const Input: FC<Props> = forwardRef(
           ref={ref}
           {...rest}
           className={cn(
-            'py-2 px-4 border border-gray-300 outline-none rounded-md w-full',
+            'p-2 border border-gray-300 outline-none rounded-md w-full',
             className
           )}
         />

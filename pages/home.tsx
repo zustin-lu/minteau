@@ -12,10 +12,10 @@ function Home() {
 
   return (
     <>
-      <div className="relative aspect-square w-1/2 mx-auto mb-6 rounded-full overflow-hidden">
+      <div className="relative aspect-square w-1/2 mx-auto mb-8 rounded-full overflow-hidden">
         <Image src="/images/couplemint.jpeg" layout="fill" />
       </div>
-      <Header variant="head2" className="text-center">
+      <Header variant="head2" className="text-center mb-6">
         <CountDown />
       </Header>
       <div className="space-y-2 text-gray-700">
