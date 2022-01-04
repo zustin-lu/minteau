@@ -1,5 +1,6 @@
-import { FC } from 'react';
-import { useQuery } from 'react-query';
+import { FC, useEffect } from 'react';
+import { useInfiniteQuery } from 'react-query';
+import { useInView } from 'react-intersection-observer';
 import ContentLoader from 'react-content-loader';
 
 import { apiClient } from 'helpers';
@@ -15,9 +16,28 @@ const Loader = (props) => (
 );
 
 const NewsBoard: FC = () => {
-  const { data, isLoading } = useQuery('newsfeed', apiClient.get.feeds);
+  const { ref, inView } = useInView();
 
-  if (isLoading) {
+  const {
+    data,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery('feeds', apiClient.get.feeds, {
+    getNextPageParam: ({ data }) => data.payload.nextPage,
+  });
+
+  useEffect(() => {
+    console.log(inView);
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
+
+  if (status === 'loading') {
     return (
       <div className="mt-3">
         <Loader />
@@ -25,13 +45,27 @@ const NewsBoard: FC = () => {
     );
   }
 
-  const { payload } = data?.data || { payload: [] };
+  const combinedPages = data?.pages.reduce((acc, cur) => {
+    return [...acc, ...(cur?.data?.payload?.docs || [])];
+  }, []);
+
+  const showLoadmoreRef = !isFetching && !isFetchingNextPage && hasNextPage;
 
   return (
     <div className="mt-3 space-y-6">
-      {payload.map((item) => (
+      {combinedPages.map((item) => (
         <Item item={item} key={item._id} />
       ))}
+
+      <div className="text-gray-400 pb-6 text-center text-sm">
+        {isFetchingNextPage
+          ? 'Đang tải thêm...'
+          : hasNextPage
+          ? 'Tải thêm'
+          : 'Đồng chí đã xem tới bài viết đầu tiên luôn rồi đó 👊🏼🥰'}
+      </div>
+
+      {showLoadmoreRef && <div ref={ref} className="bg-red-200 h-4 w-4" />}
     </div>
   );
 };

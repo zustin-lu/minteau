@@ -36,14 +36,21 @@ route.post(async (req: NextApiRequest, res: NextApiResponse) => {
 route.get(async (req: NextApiRequest, res: NextApiResponse) => {
   let response: ReturnType<typeof makeResponse>;
   try {
-    const docs = await FeedModel.find({})
-      .sort({
-        updatedAt: -1,
-      })
-      .lean();
+    const responses = await FeedModel.paginate(
+      {},
+      {
+        lean: true,
+        limit: 3,
+        page: Number(req.query.page || 1),
+        pagination: true,
+        sort: {
+          updatedAt: -1,
+        },
+      }
+    );
     response = makeResponse({
       code: StatusCodes.OK,
-      payload: docs,
+      payload: responses,
     });
   } catch (err) {
     response = makeResponse({

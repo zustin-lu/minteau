@@ -1,4 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose, { Model } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
+
+import { MongoosePaginateModel } from 'database/types';
 
 const feedSchema = new mongoose.Schema(
   {
@@ -16,6 +19,15 @@ const feedSchema = new mongoose.Schema(
   }
 );
 
+feedSchema.plugin(mongoosePaginate);
 const FeedModel = mongoose.models.feed || mongoose.model('feed', feedSchema);
 
-export default FeedModel;
+export default FeedModel as MongoosePaginateModel<{
+  author: string;
+  caption: string;
+  pictures: {
+    url: string;
+    public_id: string;
+  }[];
+  createdAt: string;
+}>;
