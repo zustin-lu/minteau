@@ -21,7 +21,7 @@ const route = nc().post(async (req: NextApiRequest, res: NextApiResponse) => {
   } else {
     response = makeResponse({
       payload: {
-        expiredAt: dayjs().add(1, 'h').toISOString(),
+        expiredAt: dayjs().add(7, 'd').toISOString(),
         user,
         avatarUrl: isMinteau ? '/images/minteau.jpeg' : '/images/lmint.jpeg',
       },
