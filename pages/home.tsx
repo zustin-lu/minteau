@@ -13,7 +13,7 @@ function Home() {
   return (
     <>
       <div className="relative aspect-square w-1/2 mx-auto mb-8 rounded-full overflow-hidden">
-        <Image src="/images/couplemint.jpeg" layout="fill" />
+        <Image src="/images/doublemint.jpg" layout="fill" objectFit="cover" />
       </div>
       <Header variant="head2" className="text-center mb-6">
         <CountDown />
