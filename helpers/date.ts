@@ -19,5 +19,8 @@ export function getReadableDate(
 }
 
 export function numberZeroPrefix(num: number): string {
-  return ('0' + num).slice(-2);
+  if (num < 10) {
+    return ('0' + num).slice(-2);
+  }
+  return String(num);
 }

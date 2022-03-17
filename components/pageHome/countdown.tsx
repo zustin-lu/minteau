@@ -5,8 +5,11 @@ import { numberZeroPrefix } from 'helpers';
 import { Header } from 'components';
 
 const Countdown: FC = () => {
+  const startDay = dayjs('2021-12-5');
+
   function getTimeObj() {
-    const ms = dayjs().diff(dayjs(new Date(2021, 11, 5)));
+    const today = dayjs();
+    const ms = today.diff(startDay);
     const days = Math.floor(ms / (24 * 60 * 60 * 1000));
     const daysms = ms % (24 * 60 * 60 * 1000);
     const hours = Math.floor(daysms / (60 * 60 * 1000));
